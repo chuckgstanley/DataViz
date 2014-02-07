@@ -8,13 +8,25 @@
 	<body>
 		<h1>Assignment 2</h1>
 		<script>
-			var Band = {"Name":"Rolling Stones", "Members": ["MickJagger", "KeithRichards", "CharlieWatts", "BrianJones", "BillWymans"]}
+			var Band = {"Name":"Rolling Stones", "Members": ["MickJagger", "KeithRichards", "CharlieWatts", "BrianJones", "BillWyman"], "onTour":false, "Albums" : ["12x5", "BeggarsBanquet", "LetItBleed", "ExileOnMainStreet"]}
 			/*This is the band name and original lineup of the Rolling Stones.*/
+			/*Albums notes some of the best records from the band's first ten years*/
 			
 			console.log(Band)
 			
 			console.log(Band)
+			console.log(Band.albums)
 			
+			console.log(Band.onTour)
+			/*The Rolling Stones are not currently on tour*/
+			
+			Band.Members[3] = "MickTaylor"
+			/*In 1969 Brian Jones was replaced by Mick Taylor*/
+			
+			console.log(Band.Members)
+			
+			
+
 			
 			
 		</script>
