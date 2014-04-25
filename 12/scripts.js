@@ -52,6 +52,7 @@ function buttonHandler(e){
 	$("#chartTitle").html("Unemployment since "+myYear);
 	
 	$.get(tableURL+"'"+myYear+"-01-01'"+myKey, mjsonLoaded, "json");
+	 History.pushState({year:myYear}, "Unemployment from "+myYear, "?year="+myYear); // logs {state:1}, "State 1", "?state=1"
 }
 
 function mchartLoaded() {
