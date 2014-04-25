@@ -16,37 +16,19 @@
 //6. Use google fusion template to create new table
 //7. Create line graph from table
 
-
-//make sure html is pulling scripts from fusion table
-//console.log("javascript working");
-
-//create function with unemployment
-//data under local name "Unemployment"
-var tableURL = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1f5wTbwjh7pbobwOgv48U_MCXPW9f-Gu-BiZfXsRb+WHERE+DATE>=";
-var myKey = "&key=AIzaSyALhD6XEx_Ge1QTHvfmlwy5e_9_p--vouY"
-
-function showNewData(e){
-	//e is click event. i will use it's target to id div
-	var myID= e.target.id;
-	var myNameArray = myID.split("_");//splits it into an array, "2000" will be second item
-	var myYear = myNameArray[1]; //grab year
-	
-	$.get(myTableURL+"'"+"-01-01'"+myKey, dataLoaded, "json)");
-	
-
 function mjsonLoaded(unemployment) {
 	//Log Unemployment numbers to demonstrate jsonloaded is working
 	console.log(unemployment);
 	// Create Array to hold data, starting with "date" and "value"
 	// headers
 
-	
+	var mtable = google.visualization.DataTable();
 	//insert data table template from fusion tables
 	//replace default data with unemployment.rows data
 	
 	   
-	mtable.addColumn('string', mdisplayDataHeader[0]);
-	mtable.addColumn('number', mdisplayDataHeader[1]);
+	mtable.addColumn('string', unemployment.columns[0]);
+	mtable.addColumn('number', unemployment.columns[1]);
 	mtable.addRows(unemployment.rows);                
 	
 	var chartOptions = {
@@ -56,22 +38,10 @@ function mjsonLoaded(unemployment) {
 		
 };	
 
-	//Create a table to add data from "table"
-	//var munmpDataTable = google.visualization.arrayToDataTable(mtable);
-
-
-	// Draw the linegraph in html div "graph div"
-
-	var munmpGraph = new google.visualization.LineChart(document.getElementById("munmpGraphDiv"));
-	munmpGraph.draw(mtable)
-
+var munmpGraph = new google.visualization.LineChart(document.getElementById("munmpGraphDiv"));
+	munmpGraph.draw(mtable, chartOptions);
 	
-
-};//end of jsonLoaded function
-
-	
-//build googleLoaded function
-//with Unemployment file imported
+}
 
 function mchartLoaded() {
 	//Console log to show that googleLoaded is working
@@ -79,9 +49,9 @@ function mchartLoaded() {
 	//$('.btn-success').on("click" showNewData);
 	//Import Unemployment json file
 	$.get("https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1f5wTbwjh7pbobwOgv48U_MCXPW9f-Gu-BiZfXsRb+WHERE+DATE>='1979-12-01'&key=AIzaSyALhD6XEx_Ge1QTHvfmlwy5e_9_p--vouY", mjsonLoaded, "json");
-};//end chartLoaded function
+}//end chartLoaded function
 
-function mpageLoaded() {
+function pageLoaded(){
 
 	//indicate page has loaded
 	console.log("Page Loaded!");
@@ -92,12 +62,40 @@ function mpageLoaded() {
 		callback : "mchartLoaded"
 
 
-	});
-
-}// end pageLoaded function
-
-//load chart
-
-
 // pageLoaded function
-$(document).ready(mpageLoaded);
+$(document).ready(pageLoaded);
+//make sure html is pulling scripts from fusion table
+//console.log("javascript working");
+
+//create function with unemployment
+//data under local name "Unemployment"
+//var tableURL = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+*+FROM+1f5wTbwjh7pbobwOgv48U_MCXPW9f-Gu-BiZfXsRb+WHERE+DATE>=";
+//var myKey = "&key=AIzaSyALhD6XEx_Ge1QTHvfmlwy5e_9_p--vouY"
+
+/*function showNewData(e){
+	//e is click event. i will use it's target to id div
+	var myID= e.target.id;
+	var myNameArray = myID.split("_");//splits it into an array, "2000" will be second item
+	var myYear = myNameArray[1]; //grab year
+	
+	$.get(myTableURL+"'"+"-01-01'"+myKey, dataLoaded, "json)");
+	
+
+
+
+	//Create a table to add data from "table"
+	//var munmpDataTable = google.visualization.arrayToDataTable(mtable);
+
+
+	// Draw the linegraph in html div "graph div"
+
+	
+
+	
+
+};//end of jsonLoaded function
+
+	
+//build googleLoaded function
+//with Unemployment file imported
+
