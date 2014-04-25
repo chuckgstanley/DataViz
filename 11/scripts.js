@@ -48,7 +48,9 @@ function buttonHandler(e){
 	
 	var myID = e.target.id;
 	var myYear = myID.split("_")[1];
-	console.log (myYear);
+	
+	$("#chartTitle").html("Unemployment since "+myYear);
+	
 	$.get(tableURL+"'"+myYear+"-01-01'"+myKey, mjsonLoaded, "json");
 }
 
@@ -59,7 +61,7 @@ function mchartLoaded() {
 $('.btn-success').on("click", buttonHandler);
 	
 	//Import Unemployment json file
-	
+	$("#year_1980").click();
 }//end chartLoaded function
 
 function mpageLoaded() {
