@@ -11,7 +11,7 @@ function mjsonLoaded(unemployment) {
 	// headers
 
 	var displayDataHeader = unemployment.columns;
-	console.log(displayDataHeader);
+	//console.log(displayDataHeader);
 
 	//insert data table template from fusion tables
 	//replace default data with unemployment.rows data
@@ -59,10 +59,23 @@ function mchartLoaded() {
 	//Console log to show that googleLoaded is working
 	console.log("Google Loaded");
 
+	console.log(History.getState());
+	var urlData = History.getState().cleanUrl;
+	var queryString = urlData.split("?");
+	var defaultYear = "1990"
+	
+	if(queryString.length>1){	
+		defaultYear = queryString[1].split("=")[1];
+	console.log(queryString);
+	
+
+	}
+	
+
 $('.btn-success').on("click", buttonHandler);
 	
 	//Import Unemployment json file
-	$("#year_1980").click();
+	$("#year_"+defaultYear).click();
 }//end chartLoaded function
 
 function mpageLoaded() {
